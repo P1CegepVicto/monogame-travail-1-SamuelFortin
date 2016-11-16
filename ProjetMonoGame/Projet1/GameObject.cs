@@ -14,6 +14,19 @@ namespace Projet1
         public Texture2D sprite;
         public Vector2 position;
         public Vector2 vitesse;
+        Rectangle RectCollision;
+
+        public Rectangle GetRect()
+        {
+            RectCollision.X = (int)this.position.X;
+            RectCollision.Y = (int)this.position.Y;
+            RectCollision.Width = this.sprite.Width;
+            RectCollision.Height = this.sprite.Height;
+
+            return RectCollision;
+
+        }
+
 
     }
 }

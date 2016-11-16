@@ -24,3 +24,6 @@ C:\Users\Utilisateur\Documents\GitHub\monogame-travail-1-SamuelFortin\ProjetMono
 C:\Users\Utilisateur\Documents\GitHub\monogame-travail-1-SamuelFortin\ProjetMonoGame\Projet1\obj\x86\Debug\Projet1.exe
 C:\Users\Utilisateur\Documents\GitHub\monogame-travail-1-SamuelFortin\ProjetMonoGame\Projet1\obj\x86\Debug\Projet1.pdb
 C:\Users\Utilisateur\Documents\GitHub\monogame-travail-1-SamuelFortin\ProjetMonoGame\Projet1\bin\Windows\x86\Debug\Content\anana.png
+C:\Users\Utilisateur\Documents\GitHub\monogame-travail-1-SamuelFortin\ProjetMonoGame\Projet1\bin\Windows\x86\Debug\Content\crayon.png
+C:\Users\Utilisateur\Documents\GitHub\monogame-travail-1-SamuelFortin\ProjetMonoGame\Projet1\bin\Windows\x86\Debug\Content\pomme.png
+C:\Users\Utilisateur\Documents\GitHub\monogame-travail-1-SamuelFortin\ProjetMonoGame\Projet1\bin\Windows\x86\Debug\Content\jungle.jpg

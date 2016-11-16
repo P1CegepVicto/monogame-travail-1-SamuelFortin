@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System;
 
 namespace Projet1
 {
@@ -13,8 +14,9 @@ namespace Projet1
         SpriteBatch spriteBatch;
         GameObject anana;
         Rectangle fenetre;
-
-
+        GameObject crayon;
+        GameObject pomme;
+        GameObject backg;
 
         public Game1()
         {
@@ -34,7 +36,7 @@ namespace Projet1
 
             this.graphics.PreferredBackBufferWidth = graphics.GraphicsDevice.DisplayMode.Width;
             this.graphics.PreferredBackBufferHeight = graphics.GraphicsDevice.DisplayMode.Height;
-            this.graphics.ToggleFullScreen();
+            this.graphics.ApplyChanges();
             fenetre = new Rectangle(0, 0, graphics.GraphicsDevice.DisplayMode.Width, graphics.GraphicsDevice.DisplayMode.Height);
             
 
@@ -51,10 +53,29 @@ namespace Projet1
             spriteBatch = new SpriteBatch(GraphicsDevice);
             anana = new GameObject();
             anana.estVivant = true;
-            anana.position.X = 440;
-            anana.position.Y = 100;
+            anana.position.X = 960;
+            anana.position.Y = 900;
             anana.sprite = Content.Load<Texture2D>("anana.png");
 
+            pomme = new GameObject();
+            pomme.estVivant = true;
+            pomme.position.X = 960;
+            pomme.position.Y = 200;
+            pomme.vitesse.X = 4;
+            pomme.sprite = Content.Load<Texture2D>("pomme.png");
+
+            crayon = new GameObject();
+            crayon.position.X = pomme.position.X;
+            crayon.position.Y = pomme.position.Y;
+            crayon.vitesse.Y = 5;
+            crayon.sprite = Content.Load<Texture2D>("crayon.png");
+
+            
+            backg = new GameObject();
+            backg.position.X = 0;
+            backg.position.Y = 0;
+            backg.sprite = Content.Load<Texture2D>("jungle.jpg");
+            
             // TODO: use this.Content to load your game content here
         }
 
@@ -92,13 +113,13 @@ namespace Projet1
             {
                 anana.position.Y += 5;
             }
-            if (anana.position.X < fenetre.Left - 50)
+            if (anana.position.X < fenetre.Left)
             {
-                anana.position.X = fenetre.Left - 50;
+                anana.position.X = fenetre.Left;
             }
-            if (anana.position.X > fenetre.Right - 150)
+            if (anana.position.X > fenetre.Right - 87)
             {
-                anana.position.X = fenetre.Right - 150;
+                anana.position.X = fenetre.Right - 87;
             }
             if (anana.position.Y < fenetre.Top)
             {
@@ -112,10 +133,44 @@ namespace Projet1
 
 
             // TODO: Add your update logic here
+            Updateanana();
+            Updatepomme();
+
 
             base.Update(gameTime);
         }
 
+
+        public void Updatepomme()
+        {
+
+            if (pomme.position.X > fenetre.Right)
+            {
+                pomme.vitesse.X = -4;
+            }
+            if (pomme.position.X < fenetre.Left)
+            {
+                pomme.vitesse.X = +4;
+            }
+
+            pomme.position += pomme.vitesse;
+            
+        }
+
+        public void Updateanana()
+        {
+
+            
+        
+        
+        }
+
+        //public void Updatecrayon();
+        //{
+        
+        
+        
+        //}
         /// <summary>
         /// This is called when the game should draw itself.
         /// </summary>
@@ -124,8 +179,10 @@ namespace Projet1
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
             spriteBatch.Begin();
+            spriteBatch.Draw(backg.sprite, backg.position, Color.White);
+            spriteBatch.Draw(pomme.sprite, pomme.position, Color.White);
             spriteBatch.Draw(anana.sprite, anana.position, Color.White);
-            
+            spriteBatch.Draw(crayon.sprite, crayon.position, Color.White);
 
 
 
