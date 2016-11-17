@@ -17,6 +17,7 @@ namespace Projet1
         GameObject crayon;
         GameObject pomme;
         GameObject backg;
+        GameObject gameover;
 
         public Game1()
         {
@@ -36,7 +37,7 @@ namespace Projet1
 
             this.graphics.PreferredBackBufferWidth = graphics.GraphicsDevice.DisplayMode.Width;
             this.graphics.PreferredBackBufferHeight = graphics.GraphicsDevice.DisplayMode.Height;
-            this.graphics.ApplyChanges();
+            this.graphics.ToggleFullScreen();
             fenetre = new Rectangle(0, 0, graphics.GraphicsDevice.DisplayMode.Width, graphics.GraphicsDevice.DisplayMode.Height);
             
 
@@ -53,7 +54,7 @@ namespace Projet1
             spriteBatch = new SpriteBatch(GraphicsDevice);
             anana = new GameObject();
             anana.estVivant = true;
-            anana.position.X = 960;
+            anana.position.X = 900;
             anana.position.Y = 900;
             anana.sprite = Content.Load<Texture2D>("anana.png");
 
@@ -67,7 +68,7 @@ namespace Projet1
             crayon = new GameObject();
             crayon.position.X = pomme.position.X;
             crayon.position.Y = pomme.position.Y;
-            crayon.vitesse.Y = 5;
+            crayon.vitesse.Y = 10;
             crayon.sprite = Content.Load<Texture2D>("crayon.png");
 
             
@@ -75,7 +76,11 @@ namespace Projet1
             backg.position.X = 0;
             backg.position.Y = 0;
             backg.sprite = Content.Load<Texture2D>("jungle.jpg");
-            
+
+            gameover = new GameObject();
+            gameover.position.X = 0;
+            gameover.position.Y = 0;
+            gameover.sprite = Content.Load<Texture2D>("gameover.jpg");
             // TODO: use this.Content to load your game content here
         }
 
@@ -135,7 +140,7 @@ namespace Projet1
             // TODO: Add your update logic here
             Updateanana();
             Updatepomme();
-
+            Updatecrayon();
 
             base.Update(gameTime);
         }
@@ -144,7 +149,7 @@ namespace Projet1
         public void Updatepomme()
         {
 
-            if (pomme.position.X > fenetre.Right)
+            if (pomme.position.X > fenetre.Right - 101)
             {
                 pomme.vitesse.X = -4;
             }
@@ -159,12 +164,25 @@ namespace Projet1
 
         public void Updateanana()
         {
-
+            if (anana.GetRect().Intersects(crayon.GetRect()))
+            {
+                anana.estVivant = false;
+            }
             
         
         
         }
+        public void Updatecrayon()
+        {
+            if (crayon.position.Y > fenetre.Bottom)
+            {
+                crayon.position.Y = pomme.position.Y;
+                crayon.position.X = pomme.position.X;
+            }
 
+
+            crayon.position += crayon.vitesse;
+        }
         //public void Updatecrayon();
         //{
         
@@ -181,9 +199,21 @@ namespace Projet1
             spriteBatch.Begin();
             spriteBatch.Draw(backg.sprite, backg.position, Color.White);
             spriteBatch.Draw(pomme.sprite, pomme.position, Color.White);
-            spriteBatch.Draw(anana.sprite, anana.position, Color.White);
+
+            if (anana.estVivant == true)
+            {
+                spriteBatch.Draw(anana.sprite, anana.position, Color.White);
+                
+
+            }
+            
             spriteBatch.Draw(crayon.sprite, crayon.position, Color.White);
 
+            if (anana.estVivant == false)
+            {
+                spriteBatch.Draw(gameover.sprite, gameover.position, Color.White);
+
+            }
 
 
             spriteBatch.End();
