@@ -180,7 +180,6 @@ namespace Projet1
                 crayon.position.X = pomme.position.X;
             }
 
-
             crayon.position += crayon.vitesse;
         }
         //public void Updatecrayon();
@@ -204,7 +203,6 @@ namespace Projet1
             {
                 spriteBatch.Draw(anana.sprite, anana.position, Color.White);
                 
-
             }
             
             spriteBatch.Draw(crayon.sprite, crayon.position, Color.White);
