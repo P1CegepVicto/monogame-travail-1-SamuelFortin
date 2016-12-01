@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
 using System;
 
 namespace Game2
@@ -17,6 +18,9 @@ namespace Game2
         GameObject megaman;
         GameObject[] Ennemis = new GameObject[6];
         Random de = new Random();
+        GameObject[] missile = new GameObject[6];
+        GameObject gameover;
+        SpriteFont font;
 
         public Game1()
         {
@@ -60,7 +64,7 @@ namespace Game2
             background.position.Y = 0;
             background.sprite = Content.Load<Texture2D>("background.jpg");
 
-
+            font = Content.Load<SpriteFont>("Font");
 
             for (int i = 0; i < Ennemis.Length; i++)
             {
@@ -94,8 +98,22 @@ namespace Game2
                 {
                     Ennemis[5].sprite = Content.Load<Texture2D>("iceman.PNG");
                 }
-                
+
+                missile[i] = new GameObject();
+                missile[i].position.X = Ennemis[i].position.X;
+                missile[i].position.Y = Ennemis[i].position.Y;
+                missile[i].vitesse.Y = 8;
+                missile[i].sprite = Content.Load<Texture2D>("fireball.PNG");
+
             }
+            gameover = new GameObject();
+            gameover.position.X = 0;
+            gameover.position.Y = 0;
+            gameover.sprite = Content.Load<Texture2D>("gameover.jpg");
+
+            //missile.position.X = Ennemis[de.Next(0,5)]
+
+
 
             // TODO: use this.Content to load your game content here
         }
@@ -120,19 +138,19 @@ namespace Game2
                 Exit();
             if (Keyboard.GetState().IsKeyDown(Keys.A))
             {
-                megaman.position.X -= 5;
+                megaman.position.X -= 7;
             }
             if (Keyboard.GetState().IsKeyDown(Keys.D))
             {
-                megaman.position.X += 5;
+                megaman.position.X += 7;
             }
             if (Keyboard.GetState().IsKeyDown(Keys.W))
             {
-                megaman.position.Y -= 5;
+                megaman.position.Y -= 7;
             }
             if (Keyboard.GetState().IsKeyDown(Keys.S))
             {
-                megaman.position.Y += 5;
+                megaman.position.Y += 7;
             }
             if (megaman.position.X < fenetre.Left)
             {
@@ -151,14 +169,53 @@ namespace Game2
                 megaman.position.Y = fenetre.Bottom - 200;
             }
             // TODO: Add your update logic here
-            //UpdateEnnemis();
+            UpdateEnnemis();
+            Updatemissile();
+            Updatemegaman();
 
             base.Update(gameTime);
         }
 
-        //public void UpdateEnnemis();
-        
-        //public void UpdateEnnemis();
+        public void UpdateEnnemis()
+        {
+            for (int k = 0; k < Ennemis.Length; k++)
+            { 
+                if (Ennemis[k].position.X > fenetre.Right - 101)
+                {
+                    Ennemis[k].vitesse.X = -(Ennemis[k].vitesse.X);
+                }
+                if (Ennemis[k].position.X < fenetre.Left)
+                {
+                    Ennemis[k].vitesse.X = -(Ennemis[k].vitesse.X);
+                }
+                Ennemis[k].position += Ennemis[k].vitesse;
+
+            }
+            
+        }
+        public void Updatemissile()
+        {
+            for (int y = 0; y < Ennemis.Length; y++)
+            { 
+                if (missile[y].position.Y > fenetre.Bottom)
+                {
+                    missile[y].position.Y = Ennemis[y].position.Y;
+                    missile[y].position.X = Ennemis[y].position.X;
+
+                }
+                missile[y].position += missile[y].vitesse;
+            }
+        }
+        public void Updatemegaman()
+        {
+            for (int i = 0; i < Ennemis.Length; i++)
+            {
+                if (megaman.GetRect().Intersects(missile[i].GetRect()))
+                {
+                    megaman.estVivant = false;
+                }
+            }
+        }
         /// <summary>
         /// This is called when the game should draw itself.
         /// </summary>
@@ -168,10 +225,21 @@ namespace Game2
             GraphicsDevice.Clear(Color.CornflowerBlue);
             spriteBatch.Begin();
             spriteBatch.Draw(background.sprite, background.position, Color.White);
-            spriteBatch.Draw(megaman.sprite, megaman.position, Color.White);
+            spriteBatch.DrawString(font, gameTime.TotalGameTime.Seconds.ToString() + ":" + gameTime.TotalGameTime.Milliseconds.ToString(), new Vector2(100, 100), Color.White);
+
+            if (megaman.estVivant == true)
+            {
+                spriteBatch.Draw(megaman.sprite, megaman.position, Color.White);
+            }
+            
             for (int j = 0; j < Ennemis.Length; j++)
             {
+                spriteBatch.Draw(missile[j].sprite, missile[j].position, Color.White);
                 spriteBatch.Draw(Ennemis[j].sprite, Ennemis[j].position, Color.White);
+            }
+            if (megaman.estVivant == false)
+            {
+                spriteBatch.Draw(gameover.sprite, gameover.position, Color.White);
             }
             spriteBatch.End();
             // TODO: Add your drawing code here

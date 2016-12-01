@@ -31,3 +31,7 @@ C:\Users\Utilisateur\Documents\GitHub\monogame-travail-1-SamuelFortin\ProjetMono
 C:\Users\Utilisateur\Documents\GitHub\monogame-travail-1-SamuelFortin\ProjetMonoGame\Game2\bin\Windows\x86\Debug\Content\gutsman.png
 C:\Users\Utilisateur\Documents\GitHub\monogame-travail-1-SamuelFortin\ProjetMonoGame\Game2\bin\Windows\x86\Debug\Content\iceman.PNG
 C:\Users\Utilisateur\Documents\GitHub\monogame-travail-1-SamuelFortin\ProjetMonoGame\Game2\bin\Windows\x86\Debug\Content\megaman.png
+C:\Users\Utilisateur\Documents\GitHub\monogame-travail-1-SamuelFortin\ProjetMonoGame\Game2\bin\Windows\x86\Debug\Content\megamantitle.mp3
+C:\Users\Utilisateur\Documents\GitHub\monogame-travail-1-SamuelFortin\ProjetMonoGame\Game2\bin\Windows\x86\Debug\Content\fireball.png
+C:\Users\Utilisateur\Documents\GitHub\monogame-travail-1-SamuelFortin\ProjetMonoGame\Game2\bin\Windows\x86\Debug\Content\gameover.jpg
+C:\Users\Utilisateur\Documents\GitHub\monogame-travail-1-SamuelFortin\ProjetMonoGame\Game2\bin\Windows\x86\Debug\Content\Font.xnb
