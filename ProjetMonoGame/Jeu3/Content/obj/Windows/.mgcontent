@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SourceFileCollection xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Profile>Reach</Profile>
+  <Platform>Windows</Platform>
+  <Config />
+  <SourceFiles>
+    <File>C:/Users/Utilisateur/Documents/GitHub/monogame-travail-1-SamuelFortin/ProjetMonoGame/Jeu3/Content/Sounds/megamantitle.mp3</File>
+    <File>C:/Users/Utilisateur/Documents/GitHub/monogame-travail-1-SamuelFortin/ProjetMonoGame/Jeu3/Content/Sounds/fire.wav</File>
+  </SourceFiles>
+</SourceFileCollection>
